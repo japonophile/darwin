@@ -1,0 +1,11 @@
+<launch>
+    <include file="$(find darwin_webviewer)/launch/darwin_webviewer.launch" />
+    <param name="robot_description" command="$(find xacro)/xacro.py '$(find darwin_description)/urdf/darwin.urdf.xacro'" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+    <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+        <param name="use_gui" value="true" />
+        <rosparam file="$(find darwin_description)/config/zeros.yaml" />
+    </node>
+    <node name="tf2_web_republisher" pkg="tf2_web_republisher" type="tf2_web_republisher" />
+    <include file="$(find rosbridge_server)/launch/rosbridge_websocket.launch" />
+</launch>

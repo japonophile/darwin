@@ -1,0 +1,597 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+   xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <property name="M_PI" value="3.1415926535897931" />
+  <property name="STL_SCALE" value="0.001 0.001 0.001" />
+  <property name="INERTIA_SCALE" value="${1.2645021e-6 * 1e-6}" />
+    <!--
+        I = m * r^2
+      The inertia tensor computed by MeshLab assumes the mass m is equal 
+      to the MeshVolume.  We could compute a scaling factor for each part:
+        s = ActualMass / MeshVolume
+      However, since it is almost the same for all parts, we compute a
+      common scaling factor, as: s = Avg(ActualMasses) / Avg(MeshVolumes)
+        s = 1.26e-6
+      Additionally, distance in MeshLab are in millimeters, so to convert
+      r^2 to square meters, we compute by 0.001^2 = 1e-6
+    -->
+  <property name="MASS_DMFB01" value="0.026" />
+  <property name="MASS_DMBB02" value="0.021" />
+  <property name="MASS_DMFB03" value="0.005" />
+  <property name="MASS_DMFB04" value="0.007" />
+  <property name="MASS_DMFB05" value="0.011" />
+  <property name="MASS_DMFB06" value="0.016" />
+  <property name="MASS_DMFB07" value="0.009" />
+  <property name="MASS_DMFF01" value="0.017" />
+  <property name="MASS_SPU5"   value="0.001" />
+  <property name="MASS_SPD3B3" value="0.001" />
+  <property name="MASS_SPD3B5" value="0.001" />
+  <property name="MASS_SPD3B7" value="0.001" />
+  <property name="MASS_SPD4B5" value="0.001" />
+  <property name="MASS_SPD7V4" value="0.001" />
+  <property name="MASS_SPL2B2" value="0.001" />
+  <property name="MASS_SPO5"   value="0.001" />
+  <property name="MASS_LB040"  value="0.056" />
+  <property name="MASS_XL320"  value="0.020" />
+  <!--
+  <property name="MESHVOLUME_DMFB01" value="19027.634766" />
+  <property name="MESHVOLUME_DMBB02" value="17309.392578" />
+  <property name="MESHVOLUME_DMFB03" value="4172.618164" />
+  <property name="MESHVOLUME_DMFB04" value="5622.555664" />
+  <property name="MESHVOLUME_DMFB05" value="8814.262695" />
+  <property name="MESHVOLUME_DMFB06" value="13174.791992" />
+  <property name="MESHVOLUME_DMFB07" value="6234.946777" />
+  <property name="MESHVOLUME_DMFF01" value="14216.210938" />
+  <property name="MESHVOLUME_SPU5"   value="690.421204" />
+  <property name="MESHVOLUME_SPD3B3" value="508.287537" />
+  <property name="MESHVOLUME_SPD3B5" value="862.646484" />
+  <property name="MESHVOLUME_SPD3B7" value="1217.040894" />
+  <property name="MESHVOLUME_SPD4B5" value="1157.969116" />
+  <property name="MESHVOLUME_SPD7V4" value="1055.941406" />
+  <property name="MESHVOLUME_SPL2B2" value="591.031128" />
+  <property name="MESHVOLUME_SPO5"   value="511.205475" />
+  <property name="MESHVOLUME_XL320"  value="16403.394531" />
+  -->
+
+  <xacro:macro name="darwin_dmfb01" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B01(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.000442e-3 2.022341e-3 8.475896e-3" rpy="0 0 0" />
+        <mass value="${MASS_DMFB01}" />
+        <inertia
+            ixx="${20832122.0 * INERTIA_SCALE}" ixy="${49.294094 * INERTIA_SCALE}" ixz="${-244.503922 * INERTIA_SCALE}"
+            iyy="${26496152.0 * INERTIA_SCALE}" iyz="${6067726.0 * INERTIA_SCALE}"
+            izz="${19461042.0 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B01(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_dmbb02" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMB-B02(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 8.773967e-3 -22.151331e-3" rpy="0 0 0" />
+        <mass value="${MASS_DMBB02}" />
+        <inertia
+            ixx="${13688240.0 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${14463692.0 * INERTIA_SCALE}" iyz="${-6208989.0 * INERTIA_SCALE}"
+            izz="${14246080.0 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMB-B02(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_dmfb03" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B03(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 -8.846923e-3 7.432426e-3" rpy="0 0 0" />
+        <mass value="${MASS_DMFB03}" />
+        <inertia
+            ixx="${466071.71875 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${1082072.625 * INERTIA_SCALE}" iyz="${124090.367188 * INERTIA_SCALE}"
+            izz="${1084667.75 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B03(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_dmfb04" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B04(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 -16.650940e-3 3.893445e-3" rpy="0 0 0" />
+        <mass value="${MASS_DMFB04}" />
+        <inertia
+            ixx="${1173912.25 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${1258405.75 * INERTIA_SCALE}" iyz="${278750.0 * INERTIA_SCALE}"
+            izz="${1855787.0 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B04(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_dmfb05" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B05(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.000002e-3 6.883461e-3 17.899050e-3" rpy="0 0 0" />
+        <mass value="${MASS_DMFB05}" />
+        <inertia
+            ixx="${3408129.0 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${4633182.5 * INERTIA_SCALE}" iyz="${442301.09375 * INERTIA_SCALE}"
+            izz="${2912481.0 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B05(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_dmfb06" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B06(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="-0.000081e-3 10.773119e-3 17.660477e-3" rpy="0 0 0" />
+        <mass value="${MASS_DMFB06}" />
+        <inertia
+            ixx="${11040391.0 * INERTIA_SCALE}" ixy="${-7.861741 * INERTIA_SCALE}" ixz="${-34.157631 * INERTIA_SCALE}"
+            iyy="${13017446.0 * INERTIA_SCALE}" iyz="${1497572.125 * INERTIA_SCALE}"
+            izz="${3562647.5 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B06(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_dmfb07" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B07(GR).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="LightGrey" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 0.241608e-3 0.0" rpy="0 0 0" />
+        <mass value="${MASS_DMFB07}" />
+        <inertia
+            ixx="${3827552.0 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${5052905.0 * INERTIA_SCALE}" iyz="0.0"
+            izz="${1241146.625 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-B07(GR).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_dmff01" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-F01(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.000021e-3 14.665582e-3 -8.712881e-3" rpy="0 0 0" />
+        <mass value="${MASS_DMFF01}" />
+        <inertia
+            ixx="${5944991.5 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${6602753.0 * INERTIA_SCALE}" iyz="${1374377.75 * INERTIA_SCALE}"
+            izz="${6640028.5 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/DMF-F01(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_spu5" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPU-5(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 1.31172e-3 0.0" rpy="0 0 0" />
+        <mass value="${MASS_SPU5}" />
+        <inertia
+            ixx="${21479.599609 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${41593.949219 * INERTIA_SCALE}" iyz="0.0"
+            izz="${22189.505859 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPU-5(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_spd3b3" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPD-3B3(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <mass value="${MASS_SPD3B3}" />
+        <inertia
+            ixx="${13782.404297 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${26906.732422 * INERTIA_SCALE}" iyz="0.0"
+            izz="${13782.404297 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPD-3B3(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_spd3b5" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPD-3B5(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <mass value="${MASS_SPD3B5}" />
+        <inertia
+            ixx="${24062.111328 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${86362.328125 * INERTIA_SCALE}" iyz="0.0"
+            izz="${63420.257812 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPD-3B5(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_spd3b7" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPD-3B7(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <mass value="${MASS_SPD3B7}" />
+        <inertia
+            ixx="${34343.71875 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${207934.0625 * INERTIA_SCALE}" iyz="0.0"
+            izz="${175172.40625 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPD-3B7(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+  
+  <xacro:macro name="darwin_spd4b5" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPD-4B5(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <mass value="${MASS_SPD4B5}" />
+        <inertia
+            ixx="${56062.675781 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${140721.21875 * INERTIA_SCALE}" iyz="0.0"
+            izz="${86163.601562 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPD-4B5(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_spd7v4" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPD-7V4(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 -0.147827e-3 0.0" rpy="0 0 0" />
+        <mass value="${MASS_SPD7V4}" />
+        <inertia
+            ixx="${30369.943359 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${98737.554688 * INERTIA_SCALE}" iyz="0.0"
+            izz="${69714.84375 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPD-7V4(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_spl2b2" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPL-2B2(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="3.975824e-3 0.0 -5.846319e-3" rpy="0 0 0" />
+        <mass value="${MASS_SPL2B2}" />
+        <inertia
+            ixx="${23641.265625 * INERTIA_SCALE}" ixy="0.0" ixz="${-6543.848633 * INERTIA_SCALE}"
+            iyy="${25356.189453 * INERTIA_SCALE}" iyz="0.0"
+            izz="${16550.568359 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPL-2B2(W).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_spo5" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPO-5(GR).stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="LightGrey" />
+      </visual>
+      <inertial>
+        <origin xyz="-0.004686e-3 1.501381e-3 -0.004686e-3" rpy="0 0 0" />
+        <mass value="${MASS_SPO5}" />
+        <inertia
+            ixx="${11954.899414 * INERTIA_SCALE}" ixy="${-2.997807 * INERTIA_SCALE}" ixz="${10.174902 * INERTIA_SCALE}"
+            iyy="${23102.574219 * INERTIA_SCALE}" iyz="${-2.997788 * INERTIA_SCALE}"
+            izz="${11954.899414 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/SPO-5(GR).stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_lb040" params="name parent xyz rpy">
+    <joint name="${name}_joint" type="fixed">
+      <origin xyz="${xyz}" rpy="${rpy}" />
+      <parent link="${parent}"/>
+      <child link="${name}_link"/>
+    </joint>
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <box size="0.07 0.022 0.022" />
+        </geometry>
+        <material name="White" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 0.0 0.0" rpy="0 0 0" />
+        <mass value="${MASS_LB040}" />
+        <inertia
+            ixx="${0.056 * (0.022*0.022 + 0.022*0.022) / 12}" ixy="0.0" ixz="0.0"
+            iyy="${0.056 * (0.07*0.07 + 0.022*0.022) / 12}" iyz="0.0"
+            izz="${0.056 * (0.022*0.022 + 0.07*0.07) / 12}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <box size="0.07 0.022 0.022" />
+        </geometry>
+      </collision>
+    </link>
+  </xacro:macro>
+
+  <xacro:macro name="darwin_xl320" params="name">
+    <link name="${name}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="0 0 0" />
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/XL-320D.stl" scale="${STL_SCALE}" />
+        </geometry>
+        <material name="Grey" />
+      </visual>
+      <inertial>
+        <origin xyz="0.0 -6.745858e-3 0.697233e-3" rpy="0 0 0" />
+        <mass value="${MASS_XL320}" />
+        <inertia
+            ixx="${2227707.0 * INERTIA_SCALE}" ixy="0.0" ixz="0.0"
+            iyy="${1477880.25 * INERTIA_SCALE}" iyz="${-77147.132812 * INERTIA_SCALE}"
+            izz="${1931732.375 * INERTIA_SCALE}"/>
+      </inertial>
+      <collision>
+        <geometry>
+          <mesh filename="package://darwin_description/meshes/XL-320D.stl" scale="${STL_SCALE}" />
+        </geometry>
+      </collision>
+    </link>
+    <gazebo reference="${name}_link">
+      <material>Gazebo/DarkGrey</material>
+    </gazebo>
+  </xacro:macro>
+
+</robot>

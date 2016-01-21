@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       name="darwin" >
+  
+  <xacro:include filename="$(find darwin_description)/urdf/materials.urdf.xacro" />
+  <xacro:include filename="$(find darwin_description)/urdf/common.urdf.xacro" />
+  <xacro:include filename="$(find darwin_description)/urdf/servo.urdf.xacro" />
+
+  <xacro:include filename="$(find darwin_description)/urdf/base.urdf.xacro" />
+  <xacro:include filename="$(find darwin_description)/urdf/body.urdf.xacro" />
+  <xacro:include filename="$(find darwin_description)/urdf/arm.urdf.xacro" />
+  <xacro:include filename="$(find darwin_description)/urdf/hand.urdf.xacro" />
+  <xacro:include filename="$(find darwin_description)/urdf/leg.urdf.xacro" />
+
+  <xacro:darwin_base name="base"/>
+
+  <xacro:darwin_body parent="base_link" />
+
+  <xacro:darwin_arm side="l" reflect="1" parent="l_shoulder_anchor_link" />
+  <xacro:darwin_arm side="r" reflect="-1" parent="r_shoulder_anchor_link" />
+
+  <xacro:darwin_leg side="l" reflect="1" parent="l_hip_anchor_link" />
+  <xacro:darwin_leg side="r" reflect="-1" parent="r_hip_anchor_link" />
+
+  <gazebo>
+    <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+      <robotNamespace>/darwin</robotNamespace>
+    </plugin>
+  </gazebo>
+
+</robot>

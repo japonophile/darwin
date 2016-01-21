@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="darwin_body" params="parent">
+    <xacro:darwin_dmbb02 name="body_skeleton" parent="${parent}"
+        xyz="0 0 0.153" rpy="${M_PI/2} 0 0" />
+    <xacro:darwin_dmfb01 name="body_torso" parent="body_skeleton_link"
+        xyz="0 0.042 -0.015" rpy="0 0 0" />
+    <xacro:darwin_lb040 name="body_back" parent="body_skeleton_link"
+        xyz="0 0.011 -0.032" rpy="0 0 0" />
+    <xacro:darwin_lb040 name="body_chest" parent="body_skeleton_link"
+        xyz="0 0.016 -0.004" rpy="0 0 0" />
+    <xacro:darwin_servo_rotating name="neck" parent="body_torso_link"
+        xyz="0 0.036 0.006" rpy="${M_PI/2} 0 0" />
+    <xacro:darwin_dmff01 name="body_head" parent="neck_link"
+        xyz="0 0 0.003" rpy="${-M_PI/2} 0 0" />
+    <xacro:darwin_spu5 name="l_shoulder_anchor" parent="body_skeleton_link"
+        xyz="0.024 0.042 0.009" rpy="${M_PI/2} 0 ${M_PI/2}" />
+    <xacro:darwin_spu5 name="r_shoulder_anchor" parent="body_skeleton_link"
+        xyz="-0.024 0.042 0.009" rpy="${M_PI/2} 0 ${M_PI/2}" />
+    <xacro:darwin_spu5 name="l_hip_anchor" parent="body_skeleton_link"
+        xyz="0.024 -0.006 -0.033" rpy="0 0 0" />
+    <xacro:darwin_spu5 name="r_hip_anchor" parent="body_skeleton_link"
+        xyz="-0.024 -0.006 -0.033" rpy="0 0 0" />
+  </xacro:macro>
+  
+</robot>

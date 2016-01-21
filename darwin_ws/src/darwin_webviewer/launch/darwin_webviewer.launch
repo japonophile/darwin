@@ -1,0 +1,4 @@
+<launch>
+    <node name="darwin_webviewer" pkg="darwin_webviewer" type="darwin_webviewer.sh"
+        args="$(find darwin_webviewer)/target/darwin-repo-0.1.0-SNAPSHOT-standalone.jar" />
+</launch>

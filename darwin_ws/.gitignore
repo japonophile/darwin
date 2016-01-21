@@ -1,0 +1,5 @@
+.catkin_workspace
+/build
+/devel
+src/darwin_description/urdf/darwin.urdf
+.DS_Store

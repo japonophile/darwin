@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="darwin_arm" params="side parent reflect">
+    <xacro:darwin_servo_fixed name="${side}_shoulder" parent="${parent}"
+        xyz="0 -0.024 0" rpy="${(1-reflect)*M_PI/2} 0 ${(1+reflect)*M_PI/2}" />
+    <xacro:darwin_dmfb03 name="${side}_biceps_anchor" parent="${side}_shoulder_link"
+        xyz="${reflect*0.012} 0 0.033" rpy="${M_PI/2} 0 ${reflect*-M_PI/2}" />
+    <xacro:darwin_servo_rotating_with_wheel name="${side}_biceps" parent="${side}_biceps_anchor_link"
+        xyz="0 0 0" rpy="${M_PI/2} 0 ${reflect*M_PI/2}" />
+    <xacro:darwin_dmfb04 name="${side}_upper_arm" parent="${side}_biceps_link"
+        xyz="0 -0.045 0" rpy="${M_PI} ${reflect*-M_PI/2} 0" />
+    <xacro:darwin_servo_rotating_with_wheel name="${side}_elbow" parent="${side}_upper_arm_link"
+        xyz="0 0 0" rpy="${M_PI} ${reflect*-M_PI/2} 0" />
+    <xacro:darwin_spu5 name="${side}_lower_arm" parent="${side}_elbow_link"
+        xyz="0 -0.024 0" rpy="0 ${M_PI} ${M_PI}" />
+    <xacro:darwin_spd3b3 name="${side}_wrist_anchor" parent="${side}_lower_arm_link"
+        xyz="0 0.0045 0" rpy="0 0 0" />
+    <xacro:darwin_hand side="${side}" reflect="${reflect}" parent="${side}_wrist_anchor_link" />
+  </xacro:macro>
+  
+</robot>

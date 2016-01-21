@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<robot xmlns:sensor="http://playerstage.sourceforge.net/gazebo/xmlschema/#sensor"
+       xmlns:controller="http://playerstage.sourceforge.net/gazebo/xmlschema/#controller"
+       xmlns:interface="http://playerstage.sourceforge.net/gazebo/xmlschema/#interface"
+       xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <xacro:macro name="darwin_leg" params="side parent reflect">
+    <xacro:darwin_servo_fixed name="${side}_hip" parent="${parent}"
+        xyz="0 -0.024 0" rpy="0 0 ${M_PI}" />
+    <xacro:darwin_spd7v4 name="${side}_groin" parent="${side}_hip_link"
+        xyz="0 0 0.0165" rpy="${-M_PI/2} 0 ${-M_PI/2}" />
+    <xacro:darwin_spd3b5 name="${side}_thigh_anchor" parent="${side}_groin_link"
+        xyz="0 -0.003 0" rpy="0 0 0" />
+    <xacro:darwin_servo_fixed_with_wheel name="${side}_thigh" parent="${side}_thigh_anchor_link"
+        xyz="-0.006 -0.0135 0" rpy="${(1-reflect)*M_PI/2} 0 ${reflect*M_PI/2}" />
+    <xacro:darwin_spu5 name="${side}_thigh_top" parent="${side}_thigh_servo_link"
+        xyz="0 -0.024 0" rpy="0 0 ${M_PI}" />
+    <xacro:darwin_dmfb04 name="${side}_upper_leg" parent="${side}_thigh_link"
+        xyz="0 0 0" rpy="0 ${reflect*M_PI/2} ${M_PI}" />
+    <xacro:darwin_servo_fixed_with_wheel name="${side}_knee" parent="${side}_upper_leg_link"
+        xyz="0 -0.045 0" rpy="${M_PI} ${reflect*M_PI/2} 0" />
+    <xacro:darwin_dmfb05 name="${side}_lower_leg" parent="${side}_knee_link"
+        xyz="0 0 0" rpy="${-M_PI/2} ${reflect*M_PI/2} 0" />
+    <xacro:darwin_servo_rotating_with_wheel name="${side}_ankle" parent="${side}_lower_leg_link"
+        xyz="0 0 0.042" rpy="${M_PI/2} 0 ${reflect*-M_PI/2}" />
+    <xacro:darwin_spd3b7 name="${side}_achiles" parent="${side}_ankle_link"
+        xyz="${reflect*0.0135} -0.009 0" rpy="${(1+reflect)*M_PI/2} 0 ${M_PI/2}" />
+    <xacro:darwin_spd7v4 name="${side}_foot_anchor" parent="${side}_achiles_link"
+        xyz="0.006 0.003 0" rpy="0 0 0" />
+    <xacro:darwin_servo_rotating name="${side}_foot" parent="${side}_foot_anchor_link"
+        xyz="0 0.0165 0" rpy="${M_PI/2} ${(1+reflect)*M_PI/2} 0" />
+    <xacro:darwin_dmfb06 name="${side}_forefoot" parent="${side}_foot_link"
+        xyz="${reflect*-0.03} -0.009 0" rpy="0 0 ${reflect*-M_PI/2}" />
+    <xacro:darwin_dmfb06 name="${side}_sole" parent="${side}_forefoot_link"
+        xyz="0 0 0" rpy="0 0 0" />
+  </xacro:macro>
+  
+</robot>
