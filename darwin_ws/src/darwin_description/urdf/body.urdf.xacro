@@ -6,7 +6,7 @@
 
   <xacro:macro name="darwin_body" params="parent">
     <xacro:darwin_dmbb02 name="body_skeleton" parent="${parent}"
-        xyz="0 0 0.153" rpy="${M_PI/2} 0 0" />
+        xyz="0 0 0" rpy="${M_PI/2} 0 ${M_PI/2}" />
     <xacro:darwin_dmfb01 name="body_torso" parent="body_skeleton_link"
         xyz="0 0.042 -0.015" rpy="0 0 0" />
     <xacro:darwin_lb040 name="body_back" parent="body_skeleton_link"

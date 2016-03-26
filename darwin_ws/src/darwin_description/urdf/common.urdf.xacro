@@ -16,7 +16,7 @@
       common scaling factor, as: s = Avg(ActualMasses) / Avg(MeshVolumes)
         s = 1.26e-6
       Additionally, distance in MeshLab are in millimeters, so to convert
-      r^2 to square meters, we compute by 0.001^2 = 1e-6
+      r^2 to square meters, we multiply by 0.001^2 = 1e-6
     -->
   <property name="MASS_DMFB01" value="0.026" />
   <property name="MASS_DMBB02" value="0.021" />
