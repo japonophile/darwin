@@ -169,16 +169,10 @@
   <joint name="l_shoulder_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
+    <origin rpy="0 0 -2.61799387799" xyz="-0.014 0.057 0.03"/>
     <parent link="body_link"/>
     <child link="l_shoulder_link"/>
   </joint>
-  <link name="l_shoulder_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
   <transmission name="l_shoulder_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="l_shoulder_joint">
@@ -189,16 +183,11 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="l_biceps_anchor_joint" type="fixed">
-    <origin rpy="1.57079632679 0 -1.57079632679" xyz="0.012 0 0.033"/>
-    <parent link="l_shoulder_link"/>
-    <child link="l_biceps_anchor_link"/>
-  </joint>
-  <link name="l_biceps_anchor_link">
+  <link name="l_shoulder_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/DMF-B03(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_shoulder.dae" scale="1 1 1"/>
       </geometry>
       <material name="White"/>
     </visual>
@@ -209,35 +198,24 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/DMF-B03(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_shoulder.dae" scale="1 1 1"/>
       </geometry>
     </collision>
-  </link>
-  <joint name="l_biceps_axis_joint" type="fixed">
-    <origin rpy="1.57079632679 0 1.57079632679" xyz="0 0 0"/>
-    <parent link="l_biceps_anchor_link"/>
-    <child link="l_biceps_axis_link"/>
-  </joint>
-  <link name="l_biceps_axis_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
   </link>
   <joint name="l_biceps_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
     <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="l_biceps_axis_link"/>
+    <parent link="l_shoulder_link"/>
     <child link="l_biceps_link"/>
   </joint>
   <link name="l_biceps_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_biceps.dae" scale="1 1 1"/>
       </geometry>
-      <material name="Grey"/>
+      <material name="White"/>
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
@@ -246,7 +224,7 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_biceps.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -260,79 +238,20 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="l_biceps_spo_joint" type="fixed">
-    <origin rpy="1.57079632679 0 0" xyz="0 0 -0.015"/>
-    <parent link="l_biceps_link"/>
-    <child link="l_biceps_spo_link"/>
-  </joint>
-  <link name="l_biceps_spo_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="LightGrey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.51169954143e-08" ixy="-3.79073324689e-12" ixz="1.28661849463e-11" iyy="2.92132536153e-08" iyz="-3.79070922135e-12" izz="1.51169954143e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_upper_arm_joint" type="fixed">
-    <origin rpy="3.14159265359 -1.57079632679 0" xyz="0 -0.045 0"/>
-    <parent link="l_biceps_link"/>
-    <child link="l_upper_arm_link"/>
-  </joint>
-  <link name="l_upper_arm_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/DMF-B04(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -16.650940e-3 3.893445e-3"/>
-      <mass value="0.007"/>
-      <inertia ixx="1.48441450534e-06" ixy="0.0" ixz="0.0" iyy="1.59125671353e-06" iyz="3.52479960375e-07" izz="2.34664655865e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/DMF-B04(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_elbow_axis_joint" type="fixed">
-    <origin rpy="3.14159265359 -1.57079632679 0" xyz="0 0 0"/>
-    <parent link="l_upper_arm_link"/>
-    <child link="l_elbow_axis_link"/>
-  </joint>
-  <link name="l_elbow_axis_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
   <joint name="l_elbow_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="l_elbow_axis_link"/>
-    <child link="l_elbow_link"/>
+    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.044"/>
+    <parent link="l_biceps_link"/>
+    <child link="l_hand_link"/>
   </joint>
-  <link name="l_elbow_link">
+  <link name="l_hand_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_hand.dae" scale="1 1 1"/>
       </geometry>
-      <material name="Grey"/>
+      <material name="White"/>
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
@@ -341,393 +260,17 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <transmission name="l_elbow_tran">
-    <type>transmission_interface/SimpleTransmission</type>
-    <joint name="l_elbow_joint">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-    </joint>
-    <actuator name="l_elbow_motor">
-      <hardwareInterface>EffortJointInterface</hardwareInterface>
-      <mechanicalReduction>1</mechanicalReduction>
-    </actuator>
-  </transmission>
-  <joint name="l_elbow_spo_joint" type="fixed">
-    <origin rpy="1.57079632679 0 0" xyz="0 0 -0.015"/>
-    <parent link="l_elbow_link"/>
-    <child link="l_elbow_spo_link"/>
-  </joint>
-  <link name="l_elbow_spo_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="LightGrey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.51169954143e-08" ixy="-3.79073324689e-12" ixz="1.28661849463e-11" iyy="2.92132536153e-08" iyz="-3.79070922135e-12" izz="1.51169954143e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_lower_arm_joint" type="fixed">
-    <origin rpy="0 3.14159265359 3.14159265359" xyz="0 -0.024 0"/>
-    <parent link="l_elbow_link"/>
-    <child link="l_lower_arm_link"/>
-  </joint>
-  <link name="l_lower_arm_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 1.31172e-3 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.71609988127e-08" ixy="0.0" ixz="0.0" iyy="5.25956361347e-08" iyz="0.0" izz="2.80586767567e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_wrist_anchor_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.0045 0"/>
-    <parent link="l_lower_arm_link"/>
-    <child link="l_wrist_anchor_link"/>
-  </joint>
-  <link name="l_wrist_anchor_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-3B3(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.74278791766e-08" ixy="0.0" ixz="0.0" iyy="3.40236196518e-08" iyz="0.0" izz="1.74278791766e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-3B3(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_wrist1_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.0015 0"/>
-    <parent link="l_wrist_anchor_link"/>
-    <child link="l_hand_wrist1_link"/>
-  </joint>
-  <link name="l_hand_wrist1_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="LightGrey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.51169954143e-08" ixy="-3.79073324689e-12" ixz="1.28661849463e-11" iyy="2.92132536153e-08" iyz="-3.79070922135e-12" izz="1.51169954143e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_wrist2_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.003 0"/>
-    <parent link="l_hand_wrist1_link"/>
-    <child link="l_hand_wrist2_link"/>
-  </joint>
-  <link name="l_hand_wrist2_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="LightGrey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.51169954143e-08" ixy="-3.79073324689e-12" ixz="1.28661849463e-11" iyy="2.92132536153e-08" iyz="-3.79070922135e-12" izz="1.51169954143e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_base_joint" type="fixed">
-    <origin rpy="0 1.57079632679 0" xyz="0 0.0045 0"/>
-    <parent link="l_hand_wrist2_link"/>
-    <child link="l_hand_base_link"/>
-  </joint>
-  <link name="l_hand_base_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="3.04265903047e-08" ixy="0.0" ixz="0.0" iyy="1.09205345275e-07" iyz="0.0" izz="8.01950491858e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_thumb_joint" type="fixed">
-    <origin rpy="1.57079632679 3.14159265359 0" xyz="0.018 0.0015 -0.009"/>
-    <parent link="l_hand_base_link"/>
-    <child link="l_hand_thumb_link"/>
-  </joint>
-  <link name="l_hand_thumb_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_palm_anchor1_joint" type="fixed">
-    <origin rpy="1.57079632679 1.57079632679 0" xyz="0.003 0.0015 0.012"/>
-    <parent link="l_hand_base_link"/>
-    <child link="l_hand_palm_anchor1_link"/>
-  </joint>
-  <link name="l_hand_palm_anchor1_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_palm_anchor2_joint" type="fixed">
-    <origin rpy="1.57079632679 1.57079632679 0" xyz="-0.009 0.0015 0.012"/>
-    <parent link="l_hand_base_link"/>
-    <child link="l_hand_palm_anchor2_link"/>
-  </joint>
-  <link name="l_hand_palm_anchor2_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_palm_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.006 0"/>
-    <parent link="l_hand_base_link"/>
-    <child link="l_hand_palm_link"/>
-  </joint>
-  <link name="l_hand_palm_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="3.04265903047e-08" ixy="0.0" ixz="0.0" iyy="1.09205345275e-07" iyz="0.0" izz="8.01950491858e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_back_joint" type="fixed">
-    <origin rpy="0 1.57079632679 1.57079632679" xyz="-0.0015 0.006 -0.015"/>
-    <parent link="l_hand_palm_anchor2_link"/>
-    <child link="l_hand_back_link"/>
-  </joint>
-  <link name="l_hand_back_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-4B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="7.08913712567e-08" ixy="0.0" ixz="0.0" iyy="1.77942276624e-07" iyz="0.0" izz="1.08954055119e-07"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-4B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_fingers_ext1_joint" type="fixed">
-    <origin rpy="-1.57079632679 0 -1.57079632679" xyz="0.021 -0.0015 -0.006"/>
-    <parent link="l_hand_back_link"/>
-    <child link="l_hand_fingers_ext1_link"/>
-  </joint>
-  <link name="l_hand_fingers_ext1_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_fingers_ext2_joint" type="fixed">
-    <origin rpy="-1.57079632679 0 -1.57079632679" xyz="0.021 -0.0015 0.006"/>
-    <parent link="l_hand_back_link"/>
-    <child link="l_hand_fingers_ext2_link"/>
-  </joint>
-  <link name="l_hand_fingers_ext2_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_fingers_int1_joint" type="fixed">
-    <origin rpy="3.14159265359 1.57079632679 0" xyz="0.003 0 -0.003"/>
-    <parent link="l_hand_fingers_ext1_link"/>
-    <child link="l_hand_fingers_int1_link"/>
-  </joint>
-  <link name="l_hand_fingers_int1_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_hand_fingers_int2_joint" type="fixed">
-    <origin rpy="3.14159265359 1.57079632679 0" xyz="0.003 0 -0.003"/>
-    <parent link="l_hand_fingers_ext2_link"/>
-    <child link="l_hand_fingers_int2_link"/>
-  </joint>
-  <link name="l_hand_fingers_int2_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_hand.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
   <joint name="r_shoulder_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
+    <origin rpy="0 0 -2.61799387799" xyz="-0.014 -0.057 0.03"/>
     <parent link="body_link"/>
     <child link="r_shoulder_link"/>
   </joint>
-  <link name="r_shoulder_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
   <transmission name="r_shoulder_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="r_shoulder_joint">
@@ -738,16 +281,11 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="r_biceps_anchor_joint" type="fixed">
-    <origin rpy="1.57079632679 0 1.57079632679" xyz="-0.012 0 0.033"/>
-    <parent link="r_shoulder_link"/>
-    <child link="r_biceps_anchor_link"/>
-  </joint>
-  <link name="r_biceps_anchor_link">
+  <link name="r_shoulder_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/DMF-B03(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_shoulder.dae" scale="1 1 1"/>
       </geometry>
       <material name="White"/>
     </visual>
@@ -758,35 +296,24 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/DMF-B03(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_shoulder.dae" scale="1 1 1"/>
       </geometry>
     </collision>
-  </link>
-  <joint name="r_biceps_axis_joint" type="fixed">
-    <origin rpy="1.57079632679 0 -1.57079632679" xyz="0 0 0"/>
-    <parent link="r_biceps_anchor_link"/>
-    <child link="r_biceps_axis_link"/>
-  </joint>
-  <link name="r_biceps_axis_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
   </link>
   <joint name="r_biceps_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
     <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="r_biceps_axis_link"/>
+    <parent link="r_shoulder_link"/>
     <child link="r_biceps_link"/>
   </joint>
   <link name="r_biceps_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_biceps.dae" scale="1 1 1"/>
       </geometry>
-      <material name="Grey"/>
+      <material name="White"/>
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
@@ -795,7 +322,7 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_biceps.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
@@ -809,91 +336,13 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="r_biceps_spo_joint" type="fixed">
-    <origin rpy="1.57079632679 0 0" xyz="0 0 -0.015"/>
-    <parent link="r_biceps_link"/>
-    <child link="r_biceps_spo_link"/>
-  </joint>
-  <link name="r_biceps_spo_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="LightGrey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.51169954143e-08" ixy="-3.79073324689e-12" ixz="1.28661849463e-11" iyy="2.92132536153e-08" iyz="-3.79070922135e-12" izz="1.51169954143e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_upper_arm_joint" type="fixed">
-    <origin rpy="3.14159265359 1.57079632679 0" xyz="0 -0.045 0"/>
-    <parent link="r_biceps_link"/>
-    <child link="r_upper_arm_link"/>
-  </joint>
-  <link name="r_upper_arm_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/DMF-B04(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -16.650940e-3 3.893445e-3"/>
-      <mass value="0.007"/>
-      <inertia ixx="1.48441450534e-06" ixy="0.0" ixz="0.0" iyy="1.59125671353e-06" iyz="3.52479960375e-07" izz="2.34664655865e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/DMF-B04(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_elbow_axis_joint" type="fixed">
-    <origin rpy="3.14159265359 1.57079632679 0" xyz="0 0 0"/>
-    <parent link="r_upper_arm_link"/>
-    <child link="r_elbow_axis_link"/>
-  </joint>
-  <link name="r_elbow_axis_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
   <joint name="r_elbow_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="r_elbow_axis_link"/>
-    <child link="r_elbow_link"/>
+    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.044"/>
+    <parent link="r_biceps_link"/>
+    <child link="r_hand_link"/>
   </joint>
-  <link name="r_elbow_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="Grey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
-      <mass value="0.02"/>
-      <inertia ixx="2.81694017968e-06" ixy="0.0" ixz="0.0" iyy="1.86878267967e-06" iyz="-9.75527114498e-08" izz="2.44267964483e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
   <transmission name="r_elbow_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="r_elbow_joint">
@@ -904,363 +353,22 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="r_elbow_spo_joint" type="fixed">
-    <origin rpy="1.57079632679 0 0" xyz="0 0 -0.015"/>
-    <parent link="r_elbow_link"/>
-    <child link="r_elbow_spo_link"/>
-  </joint>
-  <link name="r_elbow_spo_link">
+  <link name="r_hand_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="LightGrey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.51169954143e-08" ixy="-3.79073324689e-12" ixz="1.28661849463e-11" iyy="2.92132536153e-08" iyz="-3.79070922135e-12" izz="1.51169954143e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_lower_arm_joint" type="fixed">
-    <origin rpy="0 3.14159265359 3.14159265359" xyz="0 -0.024 0"/>
-    <parent link="r_elbow_link"/>
-    <child link="r_lower_arm_link"/>
-  </joint>
-  <link name="r_lower_arm_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_hand.dae" scale="1 1 1"/>
       </geometry>
       <material name="White"/>
     </visual>
     <inertial>
-      <origin rpy="0 0 0" xyz="0.0 1.31172e-3 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.71609988127e-08" ixy="0.0" ixz="0.0" iyy="5.25956361347e-08" iyz="0.0" izz="2.80586767567e-08"/>
+      <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
+      <mass value="0.02"/>
+      <inertia ixx="2.81694017968e-06" ixy="0.0" ixz="0.0" iyy="1.86878267967e-06" iyz="-9.75527114498e-08" izz="2.44267964483e-06"/>
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_wrist_anchor_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.0045 0"/>
-    <parent link="r_lower_arm_link"/>
-    <child link="r_wrist_anchor_link"/>
-  </joint>
-  <link name="r_wrist_anchor_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-3B3(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.74278791766e-08" ixy="0.0" ixz="0.0" iyy="3.40236196518e-08" iyz="0.0" izz="1.74278791766e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-3B3(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_wrist1_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.0015 0"/>
-    <parent link="r_wrist_anchor_link"/>
-    <child link="r_hand_wrist1_link"/>
-  </joint>
-  <link name="r_hand_wrist1_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="LightGrey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.51169954143e-08" ixy="-3.79073324689e-12" ixz="1.28661849463e-11" iyy="2.92132536153e-08" iyz="-3.79070922135e-12" izz="1.51169954143e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_wrist2_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.003 0"/>
-    <parent link="r_hand_wrist1_link"/>
-    <child link="r_hand_wrist2_link"/>
-  </joint>
-  <link name="r_hand_wrist2_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="LightGrey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.51169954143e-08" ixy="-3.79073324689e-12" ixz="1.28661849463e-11" iyy="2.92132536153e-08" iyz="-3.79070922135e-12" izz="1.51169954143e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_base_joint" type="fixed">
-    <origin rpy="0 1.57079632679 0" xyz="0 0.0045 0"/>
-    <parent link="r_hand_wrist2_link"/>
-    <child link="r_hand_base_link"/>
-  </joint>
-  <link name="r_hand_base_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="3.04265903047e-08" ixy="0.0" ixz="0.0" iyy="1.09205345275e-07" iyz="0.0" izz="8.01950491858e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_thumb_joint" type="fixed">
-    <origin rpy="1.57079632679 3.14159265359 0" xyz="0.018 0.0015 0.009"/>
-    <parent link="r_hand_base_link"/>
-    <child link="r_hand_thumb_link"/>
-  </joint>
-  <link name="r_hand_thumb_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_palm_anchor1_joint" type="fixed">
-    <origin rpy="1.57079632679 -1.57079632679 0" xyz="0.003 0.0015 -0.012"/>
-    <parent link="r_hand_base_link"/>
-    <child link="r_hand_palm_anchor1_link"/>
-  </joint>
-  <link name="r_hand_palm_anchor1_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_palm_anchor2_joint" type="fixed">
-    <origin rpy="1.57079632679 -1.57079632679 0" xyz="-0.009 0.0015 -0.012"/>
-    <parent link="r_hand_base_link"/>
-    <child link="r_hand_palm_anchor2_link"/>
-  </joint>
-  <link name="r_hand_palm_anchor2_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_palm_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0.006 0"/>
-    <parent link="r_hand_base_link"/>
-    <child link="r_hand_palm_link"/>
-  </joint>
-  <link name="r_hand_palm_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="3.04265903047e-08" ixy="0.0" ixz="0.0" iyy="1.09205345275e-07" iyz="0.0" izz="8.01950491858e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_back_joint" type="fixed">
-    <origin rpy="0 1.57079632679 1.57079632679" xyz="-0.0015 -0.006 -0.015"/>
-    <parent link="r_hand_palm_anchor2_link"/>
-    <child link="r_hand_back_link"/>
-  </joint>
-  <link name="r_hand_back_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-4B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="7.08913712567e-08" ixy="0.0" ixz="0.0" iyy="1.77942276624e-07" iyz="0.0" izz="1.08954055119e-07"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-4B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_fingers_ext1_joint" type="fixed">
-    <origin rpy="-1.57079632679 0 -1.57079632679" xyz="0.021 -0.0015 -0.006"/>
-    <parent link="r_hand_back_link"/>
-    <child link="r_hand_fingers_ext1_link"/>
-  </joint>
-  <link name="r_hand_fingers_ext1_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_fingers_ext2_joint" type="fixed">
-    <origin rpy="-1.57079632679 0 -1.57079632679" xyz="0.021 -0.0015 0.006"/>
-    <parent link="r_hand_back_link"/>
-    <child link="r_hand_fingers_ext2_link"/>
-  </joint>
-  <link name="r_hand_fingers_ext2_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_fingers_int1_joint" type="fixed">
-    <origin rpy="3.14159265359 1.57079632679 0" xyz="0.003 0 -0.003"/>
-    <parent link="r_hand_fingers_ext1_link"/>
-    <child link="r_hand_fingers_int1_link"/>
-  </joint>
-  <link name="r_hand_fingers_int1_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hand_fingers_int2_joint" type="fixed">
-    <origin rpy="3.14159265359 1.57079632679 0" xyz="0.003 0 -0.003"/>
-    <parent link="r_hand_fingers_ext2_link"/>
-    <child link="r_hand_fingers_int2_link"/>
-  </joint>
-  <link name="r_hand_fingers_int2_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="3.975824e-3 0.0 -5.846319e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.98944300295e-08" ixy="0.0" ixz="-8.27471033851e-09" iyy="3.20629548113e-08" iyz="0.0" izz="2.09282284461e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPL-2B2(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_hand.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>

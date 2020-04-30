@@ -5,6 +5,7 @@ import math
 import sys
 
 
+# DARWIN_URDF = 'darwin_orig.urdf'
 DARWIN_URDF = 'darwin.urdf'
 robot = URDF.load(DARWIN_URDF)
 joint_names = list(filter(lambda j: j.joint_type != 'fixed', robot.joints))
