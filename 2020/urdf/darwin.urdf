@@ -118,54 +118,6 @@
       </geometry>
     </collision>
   </link>
-  <joint name="l_hip_anchor_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0.024 -0.006 -0.033"/>
-    <parent link="body_link"/>
-    <child link="l_hip_anchor_link"/>
-  </joint>
-  <link name="l_hip_anchor_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 1.31172e-3 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.71609988127e-08" ixy="0.0" ixz="0.0" iyy="5.25956361347e-08" iyz="0.0" izz="2.80586767567e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_hip_anchor_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="-0.024 -0.006 -0.033"/>
-    <parent link="body_link"/>
-    <child link="r_hip_anchor_link"/>
-  </joint>
-  <link name="r_hip_anchor_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 1.31172e-3 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.71609988127e-08" ixy="0.0" ixz="0.0" iyy="5.25956361347e-08" iyz="0.0" izz="2.80586767567e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
   <joint name="l_shoulder_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
@@ -203,9 +155,9 @@
     </collision>
   </link>
   <joint name="l_biceps_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
+    <origin rpy="-2.61799387799 0 0" xyz="0 0 0"/>
     <parent link="l_shoulder_link"/>
     <child link="l_biceps_link"/>
   </joint>
@@ -301,9 +253,9 @@
     </collision>
   </link>
   <joint name="r_biceps_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
+    <origin rpy="-2.61799387799 0 0" xyz="0 0 0"/>
     <parent link="r_shoulder_link"/>
     <child link="r_biceps_link"/>
   </joint>
@@ -375,16 +327,10 @@
   <joint name="l_hip_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
+    <origin rpy="0 0 -2.61799387799" xyz="-0.024 0.024 -0.03"/>
     <parent link="body_link"/>
     <child link="l_hip_link"/>
   </joint>
-  <link name="l_hip_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
   <transmission name="l_hip_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="l_hip_joint">
@@ -395,16 +341,11 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="l_groin_joint" type="fixed">
-    <origin rpy="-1.57079632679 0 -1.57079632679" xyz="0 0 0.0165"/>
-    <parent link="l_hip_link"/>
-    <child link="l_groin_link"/>
-  </joint>
-  <link name="l_groin_link">
+  <link name="l_hip_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/SPD-7V4(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_hip.dae" scale="1 1 1"/>
       </geometry>
       <material name="White"/>
     </visual>
@@ -415,71 +356,17 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/SPD-7V4(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_thigh_anchor_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 -0.003 0"/>
-    <parent link="l_groin_link"/>
-    <child link="l_thigh_anchor_link"/>
-  </joint>
-  <link name="l_thigh_anchor_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="3.04265903047e-08" ixy="0.0" ixz="0.0" iyy="1.09205345275e-07" iyz="0.0" izz="8.01950491858e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_thigh_servo_joint" type="fixed">
-    <origin rpy="0.0 0 1.57079632679" xyz="-0.006 -0.0135 0"/>
-    <parent link="l_thigh_anchor_link"/>
-    <child link="l_thigh_servo_link"/>
-  </joint>
-  <link name="l_thigh_servo_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="Grey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
-      <mass value="0.02"/>
-      <inertia ixx="2.81694017968e-06" ixy="0.0" ixz="0.0" iyy="1.86878267967e-06" iyz="-9.75527114498e-08" izz="2.44267964483e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_hip.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
   <joint name="l_thigh_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="l_thigh_servo_link"/>
+    <origin rpy="0 0 -2.61799387799" xyz="0.02 0 -0.006"/>
+    <parent link="l_hip_link"/>
     <child link="l_thigh_link"/>
   </joint>
-  <link name="l_thigh_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
   <transmission name="l_thigh_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="l_thigh_joint">
@@ -490,18 +377,13 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="l_thigh_spo_joint" type="fixed">
-    <origin rpy="1.57079632679 0 0" xyz="0 0 -0.015"/>
-    <parent link="l_thigh_link"/>
-    <child link="l_thigh_spo_link"/>
-  </joint>
-  <link name="l_thigh_spo_link">
+  <link name="l_thigh_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_thigh.dae" scale="1 1 1"/>
       </geometry>
-      <material name="LightGrey"/>
+      <material name="White"/>
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
@@ -510,95 +392,17 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_thigh_top_joint" type="fixed">
-    <origin rpy="0 0 3.14159265359" xyz="0 -0.024 0"/>
-    <parent link="l_thigh_servo_link"/>
-    <child link="l_thigh_top_link"/>
-  </joint>
-  <link name="l_thigh_top_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 1.31172e-3 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.71609988127e-08" ixy="0.0" ixz="0.0" iyy="5.25956361347e-08" iyz="0.0" izz="2.80586767567e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_upper_leg_joint" type="fixed">
-    <origin rpy="0 1.57079632679 3.14159265359" xyz="0 0 0"/>
-    <parent link="l_thigh_link"/>
-    <child link="l_upper_leg_link"/>
-  </joint>
-  <link name="l_upper_leg_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/DMF-B04(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -16.650940e-3 3.893445e-3"/>
-      <mass value="0.007"/>
-      <inertia ixx="1.48441450534e-06" ixy="0.0" ixz="0.0" iyy="1.59125671353e-06" iyz="3.52479960375e-07" izz="2.34664655865e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/DMF-B04(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_knee_servo_joint" type="fixed">
-    <origin rpy="3.14159265359 1.57079632679 0" xyz="0 -0.045 0"/>
-    <parent link="l_upper_leg_link"/>
-    <child link="l_knee_servo_link"/>
-  </joint>
-  <link name="l_knee_servo_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="Grey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
-      <mass value="0.02"/>
-      <inertia ixx="2.81694017968e-06" ixy="0.0" ixz="0.0" iyy="1.86878267967e-06" iyz="-9.75527114498e-08" izz="2.44267964483e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_thigh.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
   <joint name="l_knee_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="l_knee_servo_link"/>
-    <child link="l_knee_link"/>
+    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.046"/>
+    <parent link="l_thigh_link"/>
+    <child link="l_lowerleg_link"/>
   </joint>
-  <link name="l_knee_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
   <transmission name="l_knee_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="l_knee_joint">
@@ -609,18 +413,13 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="l_knee_spo_joint" type="fixed">
-    <origin rpy="1.57079632679 0 0" xyz="0 0 -0.015"/>
-    <parent link="l_knee_link"/>
-    <child link="l_knee_spo_link"/>
-  </joint>
-  <link name="l_knee_spo_link">
+  <link name="l_lowerleg_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_lowerleg.dae" scale="1 1 1"/>
       </geometry>
-      <material name="LightGrey"/>
+      <material name="White"/>
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
@@ -629,71 +428,17 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_lowerleg.dae" scale="1 1 1"/>
       </geometry>
     </collision>
-  </link>
-  <joint name="l_lower_leg_joint" type="fixed">
-    <origin rpy="-1.57079632679 1.57079632679 0" xyz="0 0 0"/>
-    <parent link="l_knee_link"/>
-    <child link="l_lower_leg_link"/>
-  </joint>
-  <link name="l_lower_leg_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/DMF-B05(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.000002e-3 6.883461e-3 17.899050e-3"/>
-      <mass value="0.011"/>
-      <inertia ixx="4.30958627757e-06" ixy="0.0" ixz="0.0" iyy="5.85866900093e-06" iyz="5.59290661879e-07" izz="3.68283834071e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/DMF-B05(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_ankle_axis_joint" type="fixed">
-    <origin rpy="1.57079632679 0 -1.57079632679" xyz="0 0 0.042"/>
-    <parent link="l_lower_leg_link"/>
-    <child link="l_ankle_axis_link"/>
-  </joint>
-  <link name="l_ankle_axis_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
   </link>
   <joint name="l_ankle_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="l_ankle_axis_link"/>
+    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.042"/>
+    <parent link="l_lowerleg_link"/>
     <child link="l_ankle_link"/>
   </joint>
-  <link name="l_ankle_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="Grey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
-      <mass value="0.02"/>
-      <inertia ixx="2.81694017968e-06" ixy="0.0" ixz="0.0" iyy="1.86878267967e-06" iyz="-9.75527114498e-08" izz="2.44267964483e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
   <transmission name="l_ankle_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="l_ankle_joint">
@@ -704,103 +449,13 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="l_ankle_spo_joint" type="fixed">
-    <origin rpy="1.57079632679 0 0" xyz="0 0 -0.015"/>
-    <parent link="l_ankle_link"/>
-    <child link="l_ankle_spo_link"/>
-  </joint>
-  <link name="l_ankle_spo_link">
+  <link name="l_ankle_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="LightGrey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.51169954143e-08" ixy="-3.79073324689e-12" ixz="1.28661849463e-11" iyy="2.92132536153e-08" iyz="-3.79070922135e-12" izz="1.51169954143e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_achiles_joint" type="fixed">
-    <origin rpy="3.14159265359 0 1.57079632679" xyz="0.0135 -0.009 0"/>
-    <parent link="l_ankle_link"/>
-    <child link="l_achiles_link"/>
-  </joint>
-  <link name="l_achiles_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-3B7(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_ankle.dae" scale="1 1 1"/>
       </geometry>
       <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="4.34277044812e-08" ixy="0.0" ixz="0.0" iyy="2.62933058693e-07" iyz="0.0" izz="2.21505875565e-07"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-3B7(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_foot_anchor_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0.006 0.003 0"/>
-    <parent link="l_achiles_link"/>
-    <child link="l_foot_anchor_link"/>
-  </joint>
-  <link name="l_foot_anchor_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-7V4(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -0.147827e-3 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="3.84028571543e-08" ixy="0.0" ixz="0.0" iyy="1.24853845252e-07" iyz="0.0" izz="8.8154566323e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-7V4(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_foot_axis_joint" type="fixed">
-    <origin rpy="1.57079632679 3.14159265359 0" xyz="0 0.0165 0"/>
-    <parent link="l_foot_anchor_link"/>
-    <child link="l_foot_axis_link"/>
-  </joint>
-  <link name="l_foot_axis_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
-  <joint name="l_foot_joint" type="revolute">
-    <axis xyz="0 0 1"/>
-    <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="l_foot_axis_link"/>
-    <child link="l_foot_link"/>
-  </joint>
-  <link name="l_foot_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="Grey"/>
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
@@ -809,10 +464,17 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_ankle.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
+  <joint name="l_foot_joint" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
+    <origin rpy="0 0 -2.61799387799" xyz="-0.033 0 0"/>
+    <parent link="l_ankle_link"/>
+    <child link="l_foot_link"/>
+  </joint>
   <transmission name="l_foot_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="l_foot_joint">
@@ -823,16 +485,11 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="l_forefoot_joint" type="fixed">
-    <origin rpy="0 0 -1.57079632679" xyz="-0.03 -0.009 0"/>
-    <parent link="l_foot_link"/>
-    <child link="l_forefoot_link"/>
-  </joint>
-  <link name="l_forefoot_link">
+  <link name="l_foot_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/DMF-B06(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_foot.dae" scale="1 1 1"/>
       </geometry>
       <material name="White"/>
     </visual>
@@ -843,47 +500,17 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/DMF-B06(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="l_sole_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="l_forefoot_link"/>
-    <child link="l_sole_link"/>
-  </joint>
-  <link name="l_sole_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/DMF-B06(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.000081e-3 10.773119e-3 17.660477e-3"/>
-      <mass value="0.016"/>
-      <inertia ixx="1.39605976043e-05" ixy="-9.94118800416e-12" ixz="-4.31923961305e-11" iyy="1.64605878036e-05" iyz="1.89368309696e-06" izz="4.50497524531e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/DMF-B06(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/l_foot.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
   <joint name="r_hip_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
+    <origin rpy="0 0 -2.61799387799" xyz="-0.024 -0.024 -0.03"/>
     <parent link="body_link"/>
     <child link="r_hip_link"/>
   </joint>
-  <link name="r_hip_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
   <transmission name="r_hip_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="r_hip_joint">
@@ -894,16 +521,11 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="r_groin_joint" type="fixed">
-    <origin rpy="-1.57079632679 0 -1.57079632679" xyz="0 0 0.0165"/>
-    <parent link="r_hip_link"/>
-    <child link="r_groin_link"/>
-  </joint>
-  <link name="r_groin_link">
+  <link name="r_hip_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/SPD-7V4(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_hip.dae" scale="1 1 1"/>
       </geometry>
       <material name="White"/>
     </visual>
@@ -914,71 +536,17 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/SPD-7V4(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_thigh_anchor_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 -0.003 0"/>
-    <parent link="r_groin_link"/>
-    <child link="r_thigh_anchor_link"/>
-  </joint>
-  <link name="r_thigh_anchor_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="3.04265903047e-08" ixy="0.0" ixz="0.0" iyy="1.09205345275e-07" iyz="0.0" izz="8.01950491858e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-3B5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_thigh_servo_joint" type="fixed">
-    <origin rpy="3.14159265359 0 -1.57079632679" xyz="-0.006 -0.0135 0"/>
-    <parent link="r_thigh_anchor_link"/>
-    <child link="r_thigh_servo_link"/>
-  </joint>
-  <link name="r_thigh_servo_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="Grey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
-      <mass value="0.02"/>
-      <inertia ixx="2.81694017968e-06" ixy="0.0" ixz="0.0" iyy="1.86878267967e-06" iyz="-9.75527114498e-08" izz="2.44267964483e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_hip.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
   <joint name="r_thigh_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="r_thigh_servo_link"/>
+    <origin rpy="0 0 -2.61799387799" xyz="0.02 0 -0.006"/>
+    <parent link="r_hip_link"/>
     <child link="r_thigh_link"/>
   </joint>
-  <link name="r_thigh_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
   <transmission name="r_thigh_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="r_thigh_joint">
@@ -989,18 +557,13 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="r_thigh_spo_joint" type="fixed">
-    <origin rpy="1.57079632679 0 0" xyz="0 0 -0.015"/>
-    <parent link="r_thigh_link"/>
-    <child link="r_thigh_spo_link"/>
-  </joint>
-  <link name="r_thigh_spo_link">
+  <link name="r_thigh_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_thigh.dae" scale="1 1 1"/>
       </geometry>
-      <material name="LightGrey"/>
+      <material name="White"/>
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
@@ -1009,95 +572,17 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_thigh_top_joint" type="fixed">
-    <origin rpy="0 0 3.14159265359" xyz="0 -0.024 0"/>
-    <parent link="r_thigh_servo_link"/>
-    <child link="r_thigh_top_link"/>
-  </joint>
-  <link name="r_thigh_top_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 1.31172e-3 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="2.71609988127e-08" ixy="0.0" ixz="0.0" iyy="5.25956361347e-08" iyz="0.0" izz="2.80586767567e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPU-5(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_upper_leg_joint" type="fixed">
-    <origin rpy="0 -1.57079632679 3.14159265359" xyz="0 0 0"/>
-    <parent link="r_thigh_link"/>
-    <child link="r_upper_leg_link"/>
-  </joint>
-  <link name="r_upper_leg_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/DMF-B04(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -16.650940e-3 3.893445e-3"/>
-      <mass value="0.007"/>
-      <inertia ixx="1.48441450534e-06" ixy="0.0" ixz="0.0" iyy="1.59125671353e-06" iyz="3.52479960375e-07" izz="2.34664655865e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/DMF-B04(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_knee_servo_joint" type="fixed">
-    <origin rpy="3.14159265359 -1.57079632679 0" xyz="0 -0.045 0"/>
-    <parent link="r_upper_leg_link"/>
-    <child link="r_knee_servo_link"/>
-  </joint>
-  <link name="r_knee_servo_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="Grey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
-      <mass value="0.02"/>
-      <inertia ixx="2.81694017968e-06" ixy="0.0" ixz="0.0" iyy="1.86878267967e-06" iyz="-9.75527114498e-08" izz="2.44267964483e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_thigh.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
   <joint name="r_knee_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="r_knee_servo_link"/>
-    <child link="r_knee_link"/>
+    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.046"/>
+    <parent link="r_thigh_link"/>
+    <child link="r_lowerleg_link"/>
   </joint>
-  <link name="r_knee_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
   <transmission name="r_knee_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="r_knee_joint">
@@ -1108,18 +593,13 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="r_knee_spo_joint" type="fixed">
-    <origin rpy="1.57079632679 0 0" xyz="0 0 -0.015"/>
-    <parent link="r_knee_link"/>
-    <child link="r_knee_spo_link"/>
-  </joint>
-  <link name="r_knee_spo_link">
+  <link name="r_lowerleg_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_lowerleg.dae" scale="1 1 1"/>
       </geometry>
-      <material name="LightGrey"/>
+      <material name="White"/>
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
@@ -1128,71 +608,17 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_lowerleg.dae" scale="1 1 1"/>
       </geometry>
     </collision>
-  </link>
-  <joint name="r_lower_leg_joint" type="fixed">
-    <origin rpy="-1.57079632679 -1.57079632679 0" xyz="0 0 0"/>
-    <parent link="r_knee_link"/>
-    <child link="r_lower_leg_link"/>
-  </joint>
-  <link name="r_lower_leg_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/DMF-B05(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.000002e-3 6.883461e-3 17.899050e-3"/>
-      <mass value="0.011"/>
-      <inertia ixx="4.30958627757e-06" ixy="0.0" ixz="0.0" iyy="5.85866900093e-06" iyz="5.59290661879e-07" izz="3.68283834071e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/DMF-B05(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_ankle_axis_joint" type="fixed">
-    <origin rpy="1.57079632679 0 1.57079632679" xyz="0 0 0.042"/>
-    <parent link="r_lower_leg_link"/>
-    <child link="r_ankle_axis_link"/>
-  </joint>
-  <link name="r_ankle_axis_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
   </link>
   <joint name="r_ankle_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="r_ankle_axis_link"/>
+    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.042"/>
+    <parent link="r_lowerleg_link"/>
     <child link="r_ankle_link"/>
   </joint>
-  <link name="r_ankle_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="Grey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
-      <mass value="0.02"/>
-      <inertia ixx="2.81694017968e-06" ixy="0.0" ixz="0.0" iyy="1.86878267967e-06" iyz="-9.75527114498e-08" izz="2.44267964483e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
   <transmission name="r_ankle_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="r_ankle_joint">
@@ -1203,103 +629,13 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="r_ankle_spo_joint" type="fixed">
-    <origin rpy="1.57079632679 0 0" xyz="0 0 -0.015"/>
-    <parent link="r_ankle_link"/>
-    <child link="r_ankle_spo_link"/>
-  </joint>
-  <link name="r_ankle_spo_link">
+  <link name="r_ankle_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="LightGrey"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.004686e-3 1.501381e-3 -0.004686e-3"/>
-      <mass value="0.001"/>
-      <inertia ixx="1.51169954143e-08" ixy="-3.79073324689e-12" ixz="1.28661849463e-11" iyy="2.92132536153e-08" iyz="-3.79070922135e-12" izz="1.51169954143e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPO-5(GR).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_achiles_joint" type="fixed">
-    <origin rpy="0.0 0 1.57079632679" xyz="-0.0135 -0.009 0"/>
-    <parent link="r_ankle_link"/>
-    <child link="r_achiles_link"/>
-  </joint>
-  <link name="r_achiles_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-3B7(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_ankle.dae" scale="1 1 1"/>
       </geometry>
       <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 0.0 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="4.34277044812e-08" ixy="0.0" ixz="0.0" iyy="2.62933058693e-07" iyz="0.0" izz="2.21505875565e-07"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-3B7(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_foot_anchor_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0.006 0.003 0"/>
-    <parent link="r_achiles_link"/>
-    <child link="r_foot_anchor_link"/>
-  </joint>
-  <link name="r_foot_anchor_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/SPD-7V4(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="0.0 -0.147827e-3 0.0"/>
-      <mass value="0.001"/>
-      <inertia ixx="3.84028571543e-08" ixy="0.0" ixz="0.0" iyy="1.24853845252e-07" iyz="0.0" izz="8.8154566323e-08"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/SPD-7V4(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_foot_axis_joint" type="fixed">
-    <origin rpy="1.57079632679 0.0 0" xyz="0 0.0165 0"/>
-    <parent link="r_foot_anchor_link"/>
-    <child link="r_foot_axis_link"/>
-  </joint>
-  <link name="r_foot_axis_link">
-    <inertial>
-      <mass value="0.0001"/>
-      <inertia ixx="1.0e-12" ixy="0.0" ixz="0.0" iyy="1.0e-12" iyz="0.0" izz="1.0e-12"/>
-    </inertial>
-  </link>
-  <joint name="r_foot_joint" type="revolute">
-    <axis xyz="0 0 1"/>
-    <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
-    <parent link="r_foot_axis_link"/>
-    <child link="r_foot_link"/>
-  </joint>
-  <link name="r_foot_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="Grey"/>
     </visual>
     <inertial>
       <origin rpy="0 0 0" xyz="0.0 -6.745858e-3 0.697233e-3"/>
@@ -1308,10 +644,17 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/XL-320D.dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_ankle.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
+  <joint name="r_foot_joint" type="revolute">
+    <axis xyz="0 0 1"/>
+    <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
+    <origin rpy="0 0 -2.61799387799" xyz="-0.033 0 0"/>
+    <parent link="r_ankle_link"/>
+    <child link="r_foot_link"/>
+  </joint>
   <transmission name="r_foot_tran">
     <type>transmission_interface/SimpleTransmission</type>
     <joint name="r_foot_joint">
@@ -1322,16 +665,11 @@
       <mechanicalReduction>1</mechanicalReduction>
     </actuator>
   </transmission>
-  <joint name="r_forefoot_joint" type="fixed">
-    <origin rpy="0 0 1.57079632679" xyz="0.03 -0.009 0"/>
-    <parent link="r_foot_link"/>
-    <child link="r_forefoot_link"/>
-  </joint>
-  <link name="r_forefoot_link">
+  <link name="r_foot_link">
     <visual>
       <origin rpy="0 0 0" xyz="0 0 0"/>
       <geometry>
-        <mesh filename="meshes/DMF-B06(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_foot.dae" scale="1 1 1"/>
       </geometry>
       <material name="White"/>
     </visual>
@@ -1342,31 +680,7 @@
     </inertial>
     <collision>
       <geometry>
-        <mesh filename="meshes/DMF-B06(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
-  </link>
-  <joint name="r_sole_joint" type="fixed">
-    <origin rpy="0 0 0" xyz="0 0 0"/>
-    <parent link="r_forefoot_link"/>
-    <child link="r_sole_link"/>
-  </joint>
-  <link name="r_sole_link">
-    <visual>
-      <origin rpy="0 0 0" xyz="0 0 0"/>
-      <geometry>
-        <mesh filename="meshes/DMF-B06(W).dae" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="White"/>
-    </visual>
-    <inertial>
-      <origin rpy="0 0 0" xyz="-0.000081e-3 10.773119e-3 17.660477e-3"/>
-      <mass value="0.016"/>
-      <inertia ixx="1.39605976043e-05" ixy="-9.94118800416e-12" ixz="-4.31923961305e-11" iyy="1.64605878036e-05" iyz="1.89368309696e-06" izz="4.50497524531e-06"/>
-    </inertial>
-    <collision>
-      <geometry>
-        <mesh filename="meshes/DMF-B06(W).dae" scale="0.001 0.001 0.001"/>
+        <mesh filename="meshes/r_foot.dae" scale="1 1 1"/>
       </geometry>
     </collision>
   </link>
