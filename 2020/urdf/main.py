@@ -10,8 +10,10 @@ robot = URDF.load(DARWIN_URDF)
 joint_names = list(filter(lambda j: j.joint_type != 'fixed', robot.joints))
 default_angle = math.pi * 150 / 180
 cfg = dict(zip(joint_names, [default_angle] * len(joint_names)))
+cfg['l_shoulder_joint'] = math.pi * 90 / 180
 cfg['l_biceps_joint'] = math.pi * 210 / 180
 robot.show(cfg=cfg)
+# robot.animate()
 
 
 def print_link(l, indent=''):

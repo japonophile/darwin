@@ -119,9 +119,9 @@
     </collision>
   </link>
   <joint name="l_shoulder_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="-0.014 0.057 0.03"/>
+    <origin rpy="0 -2.61799387799 0" xyz="-0.014 0.039 0.042"/>
     <parent link="body_link"/>
     <child link="l_shoulder_link"/>
   </joint>
@@ -157,7 +157,7 @@
   <joint name="l_biceps_joint" type="revolute">
     <axis xyz="1 0 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="-2.61799387799 0 0" xyz="0 0 0"/>
+    <origin rpy="-2.61799387799 0 0" xyz="0 0.018 -0.012"/>
     <parent link="l_shoulder_link"/>
     <child link="l_biceps_link"/>
   </joint>
@@ -217,9 +217,9 @@
     </collision>
   </link>
   <joint name="r_shoulder_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="-0.014 -0.057 0.03"/>
+    <origin rpy="0 -2.61799387799 0" xyz="-0.014 -0.039 0.042"/>
     <parent link="body_link"/>
     <child link="r_shoulder_link"/>
   </joint>
@@ -255,7 +255,7 @@
   <joint name="r_biceps_joint" type="revolute">
     <axis xyz="1 0 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="-2.61799387799 0 0" xyz="0 0 0"/>
+    <origin rpy="-2.61799387799 0 0" xyz="0 -0.018 -0.012"/>
     <parent link="r_shoulder_link"/>
     <child link="r_biceps_link"/>
   </joint>
