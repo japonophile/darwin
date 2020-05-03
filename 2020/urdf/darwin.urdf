@@ -85,7 +85,7 @@
   <joint name="neck_joint" type="revolute">
     <axis xyz="0 0 1"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 0"/>
+    <origin rpy="0 0 -2.61799387799" xyz="-0.009 0 0.063"/>
     <parent link="body_link"/>
     <child link="head_link"/>
   </joint>
@@ -101,7 +101,7 @@
   </transmission>
   <link name="head_link">
     <visual>
-      <origin rpy="0 0 0" xyz="0.011 0 0.076"/> -->
+      <origin rpy="0 0 0" xyz="0 0 0"/> -->
       <geometry>
         <mesh filename="meshes/head.dae" scale="1 1 1"/>
       </geometry>

@@ -16,6 +16,7 @@ robot = URDF.load(DARWIN_URDF)
 joint_names = list(filter(lambda j: j.joint_type != 'fixed', robot.joints))
 default_angle = math.pi * 150 / 180
 cfg = dict(zip(joint_names, [default_angle] * len(joint_names)))
+cfg['neck_joint'] = ang(-60)
 cfg['l_shoulder_joint'] = ang(-60)
 cfg['l_biceps_joint'] = ang(60)
 cfg['l_elbow_joint'] = ang(-120)    # limit: 0-150
