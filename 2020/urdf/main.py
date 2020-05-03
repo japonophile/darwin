@@ -5,13 +5,33 @@ import math
 import sys
 
 
+def ang(offset_deg):
+    abs_deg = 150 + offset_deg
+    abs_rad = math.pi * abs_deg / 180
+    return abs_rad
+
+
 DARWIN_URDF = 'darwin.urdf'
 robot = URDF.load(DARWIN_URDF)
 joint_names = list(filter(lambda j: j.joint_type != 'fixed', robot.joints))
 default_angle = math.pi * 150 / 180
 cfg = dict(zip(joint_names, [default_angle] * len(joint_names)))
-cfg['l_shoulder_joint'] = math.pi * 90 / 180
-cfg['l_biceps_joint'] = math.pi * 210 / 180
+cfg['l_shoulder_joint'] = ang(-60)
+cfg['l_biceps_joint'] = ang(60)
+cfg['l_elbow_joint'] = ang(-120)    # limit: 0-150
+cfg['r_shoulder_joint'] = ang(-60)
+cfg['r_biceps_joint'] = ang(-60)
+cfg['r_elbow_joint'] = ang(120)   # limit:150-300
+cfg['l_hip_joint'] = ang(30)
+cfg['l_thigh_joint'] = ang(-60)
+cfg['l_knee_joint'] = ang(30)
+cfg['l_ankle_joint'] = ang(30)
+cfg['l_foot_joint'] = ang(-30)
+cfg['r_hip_joint'] = ang(-30)
+cfg['r_thigh_joint'] = ang(-60)
+cfg['r_knee_joint'] = ang(30)
+cfg['r_ankle_joint'] = ang(30)
+cfg['r_foot_joint'] = ang(30)
 robot.show(cfg=cfg)
 # robot.animate()
 

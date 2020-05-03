@@ -191,9 +191,9 @@
     </actuator>
   </transmission>
   <joint name="l_elbow_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.044"/>
+    <origin rpy="-2.61799387799 0 0" xyz="0 0 -0.044"/>
     <parent link="l_biceps_link"/>
     <child link="l_hand_link"/>
   </joint>
@@ -289,9 +289,9 @@
     </actuator>
   </transmission>
   <joint name="r_elbow_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.044"/>
+    <origin rpy="-2.61799387799 0 0" xyz="0 0 -0.044"/>
     <parent link="r_biceps_link"/>
     <child link="r_hand_link"/>
   </joint>
@@ -325,9 +325,9 @@
     </collision>
   </link>
   <joint name="l_hip_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="-0.024 0.024 -0.03"/>
+    <origin rpy="-2.61799387799 0 0" xyz="-0.024 0.024 -0.03"/>
     <parent link="body_link"/>
     <child link="l_hip_link"/>
   </joint>
@@ -361,9 +361,9 @@
     </collision>
   </link>
   <joint name="l_thigh_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0.02 0 -0.006"/>
+    <origin rpy="0 -2.61799387799 0" xyz="0.02 0 -0.006"/>
     <parent link="l_hip_link"/>
     <child link="l_thigh_link"/>
   </joint>
@@ -397,9 +397,9 @@
     </collision>
   </link>
   <joint name="l_knee_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.046"/>
+    <origin rpy="0 -2.61799387799 0" xyz="0 0 -0.046"/>
     <parent link="l_thigh_link"/>
     <child link="l_lowerleg_link"/>
   </joint>
@@ -433,9 +433,9 @@
     </collision>
   </link>
   <joint name="l_ankle_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.042"/>
+    <origin rpy="0 -2.61799387799 0" xyz="0 0 -0.042"/>
     <parent link="l_lowerleg_link"/>
     <child link="l_ankle_link"/>
   </joint>
@@ -469,9 +469,9 @@
     </collision>
   </link>
   <joint name="l_foot_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="-0.033 0 0"/>
+    <origin rpy="-2.61799387799 0 0" xyz="-0.033 0 0"/>
     <parent link="l_ankle_link"/>
     <child link="l_foot_link"/>
   </joint>
@@ -505,9 +505,9 @@
     </collision>
   </link>
   <joint name="r_hip_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="-0.024 -0.024 -0.03"/>
+    <origin rpy="-2.61799387799 0 0" xyz="-0.024 -0.024 -0.03"/>
     <parent link="body_link"/>
     <child link="r_hip_link"/>
   </joint>
@@ -541,9 +541,9 @@
     </collision>
   </link>
   <joint name="r_thigh_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0.02 0 -0.006"/>
+    <origin rpy="0 -2.61799387799 0" xyz="0.02 0 -0.006"/>
     <parent link="r_hip_link"/>
     <child link="r_thigh_link"/>
   </joint>
@@ -577,9 +577,9 @@
     </collision>
   </link>
   <joint name="r_knee_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.046"/>
+    <origin rpy="0 -2.61799387799 0" xyz="0 0 -0.046"/>
     <parent link="r_thigh_link"/>
     <child link="r_lowerleg_link"/>
   </joint>
@@ -613,9 +613,9 @@
     </collision>
   </link>
   <joint name="r_ankle_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="0 1 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="0 0 -0.042"/>
+    <origin rpy="0 -2.61799387799 0" xyz="0 0 -0.042"/>
     <parent link="r_lowerleg_link"/>
     <child link="r_ankle_link"/>
   </joint>
@@ -649,9 +649,9 @@
     </collision>
   </link>
   <joint name="r_foot_joint" type="revolute">
-    <axis xyz="0 0 1"/>
+    <axis xyz="1 0 0"/>
     <limit effort="0.39" lower="0" upper="5.23598775598" velocity="11.9380520836"/>
-    <origin rpy="0 0 -2.61799387799" xyz="-0.033 0 0"/>
+    <origin rpy="-2.61799387799 0 0" xyz="-0.033 0 0"/>
     <parent link="r_ankle_link"/>
     <child link="r_foot_link"/>
   </joint>
