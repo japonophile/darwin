@@ -1,2 +1,4 @@
 .python-version
 software/darwin_mini/blend
+__pycache__/
+.ipynb_checkpoints/

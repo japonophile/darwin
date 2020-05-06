@@ -1,0 +1,220 @@
+{
+  "controllers": {
+    "my_dxl_controller": {
+      "sync_read": true,
+      "protocol": 2,
+      "attached_motors": [
+        "head",
+        "left_arm",
+        "right_arm",
+        "left_leg",
+        "right_leg"
+      ],
+      "port": "/dev/ttyAMA0",
+      "syncloop": "LightDxlController"
+    }
+  },
+  "motorgroups": {
+    "head": [
+      "neck_joint"
+    ],
+    "left_arm": [
+      "l_shoulder_joint",
+      "l_biceps_joint",
+      "l_elbow_joint"
+    ],
+    "right_arm": [
+      "r_shoulder_joint",
+      "r_biceps_joint",
+      "r_elbow_joint"
+    ],
+    "left_leg": [
+      "l_hip_joint",
+      "l_thigh_joint",
+      "l_knee_joint",
+      "l_ankle_joint",
+      "l_foot_joint"
+    ],
+    "right_leg": [
+      "r_hip_joint",
+      "r_thigh_joint",
+      "r_knee_joint",
+      "r_ankle_joint",
+      "r_foot_joint"
+    ]
+  },
+  "motors": {
+    "neck_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 17,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "l_shoulder_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 2,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "l_biceps_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 4,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "l_elbow_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 6,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "r_shoulder_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 1,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "r_biceps_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 3,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "r_elbow_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 5,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "l_hip_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 8,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "l_thigh_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 10,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "l_knee_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 12,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "l_ankle_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 14,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "l_foot_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 16,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "r_hip_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 7,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "r_thigh_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 9,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "r_knee_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 11,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "r_ankle_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 13,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    },
+    "r_foot_joint": {
+      "offset": 0.0,
+      "type": "XL-320",
+      "id": 15,
+      "angle_limit": [
+        -150.0,
+        150.0
+      ],
+      "orientation": "direct"
+    }
+  },
+  "sensors": {
+  }
+}
