@@ -12,8 +12,10 @@ class WalkStraight(LoopPrimitive):
 
     def setup(self):
         self.step_length = 0.1
-        self.step_height = 0.005
-        self.pelvis_height = 0.088
+        # self.step_height = 0.005
+        # self.pelvis_height = 0.088
+        self.step_height = 0.01
+        self.pelvis_height = 0.098
         self.swing_side = 'r'
         self.x_stable = 0.
         self.x_swing_start = 0.
@@ -27,12 +29,13 @@ class WalkStraight(LoopPrimitive):
         print(t)
         step = t // self.step_duration
         t = t % self.step_duration
+        done = False
         if step > self.current_step:
             self.current_step = step
-            self.start_next_step()
-        q = self.current_trajectory(t)
-        # print(t, q)
-        self.goto_position(q)
+            done = self.start_next_step()
+        if not done:
+            q = self.current_trajectory(t)
+            self.goto_position(q)
 
     def get_current_step_length(self):
         next_step_max_length = self.step_length if self.current_step > 0 else 0.5 * self.step_length
@@ -61,14 +64,13 @@ class WalkStraight(LoopPrimitive):
             if self.current_step_length < 1e-6:
                 print('Done!')
                 self.stop()
-                return
+                return True
         else:
             self.current_step_length = self.get_current_step_length()
         self.current_trajectory = self.create_footstep_trajectory()
+        return False
 
     def goto_position(self, qs):
         for name, q in qs.items():
             m = self.motors[name]
-            if name in ['r_thigh_joint', 'r_knee_joint', 'r_ankle_joint']:
-                q = -q
             m.goal_position = rad2deg(q)

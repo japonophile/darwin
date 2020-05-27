@@ -11,7 +11,8 @@ a3 = 0.042
 a4 = 0.006
 
 
-def darwin_leg_ik(dx, dy, dz):
+def darwin_leg_ik(dx, dy, dz, side):
+    assert side in ['l', 'r']
     assert dz >= 0  # dx and dy are allowed to be negative
     q = [.0] * 5
     q[0] = atan(dy / (a1 + a2 + a3 - a4 - dz))
@@ -30,6 +31,10 @@ def darwin_leg_ik(dx, dy, dz):
     q[1] = beta1 + alpha
     q[3] = beta3 - alpha
     q[2] = -(q[1] + q[3])
+    if side == 'r':
+        q[1] = -q[1]
+        q[2] = -q[2]
+        q[3] = -q[3]
     # angle of the foot
     q[4] = -q[0] if abs(q[0]) > EPS else 0.0
     return q
