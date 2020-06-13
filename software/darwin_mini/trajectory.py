@@ -1,9 +1,5 @@
 from math import sqrt
-from .ik import darwin_leg_ik
-
-
-PELVIS_HEIGHT_REST = 0.118
-joint_names = ['hip', 'thigh', 'knee', 'ankle', 'foot']
+from .ik import PELVIS_HEIGHT_REST, FOOT_SPREAD
 
 
 class FootstepTrajectory(object):
@@ -25,6 +21,14 @@ class FootstepTrajectory(object):
         # - pelvis is (and stays) at y = 0
         # - pelvis start and end velocities are given as [vx, vz]
 
+    @property
+    def stable_side(self):
+        return 'l' if self.swing_side == 'r' else 'r'
+
+    @staticmethod
+    def get_y_foot(side):
+        return (1.0 if side == 'l' else -1.0) * FOOT_SPREAD
+
     def get_pelvis_pos(self, t):
         L = self.step_length
         xs = 0.5 * (self.x_stable + self.x_swing_start)
@@ -36,7 +40,8 @@ class FootstepTrajectory(object):
                  - 2 * (L / (2 * tf**3) - (vs + ve) / (2 * tf**2)) * t**3)
         h = self.pelvis_height
         z_pel = sqrt(h**2 - (x_pel - self.x_stable)**2)
-        return x_pel, z_pel
+        y_pel = 0.0
+        return x_pel, y_pel, z_pel
 
     def get_swing_foot_pos(self, t):
         L = self.step_length
@@ -45,42 +50,28 @@ class FootstepTrajectory(object):
         tf = self.duration
         x_foot = xs + (3 * L / tf**2) * t**2 - (2 * L / tf**3) * t**3
         z_foot = (4 * h * t / tf) * (1 - t / tf)
-        return x_foot, z_foot
+        y_foot = self.get_y_foot(self.swing_side)
+        return x_foot, y_foot, z_foot
 
-    def get_stable_foot_disp_vs_pelvis(self, pelvis_pos):
-        x_pel, z_pel = pelvis_pos
-        dx = self.x_stable - x_pel
-        dz = PELVIS_HEIGHT_REST - z_pel
-        return -dx, dz
-
-    def get_swing_foot_disp_vs_pelvis(self, swing_foot_pos, pelvis_pos):
-        x_foot, z_foot = swing_foot_pos
-        x_pel, z_pel = pelvis_pos
-        dx = x_foot - x_pel
-        dz = PELVIS_HEIGHT_REST - z_pel - z_foot
-        return -dx, dz
+    def get_pos(self, t):
+        """
+        Returns a map of pelvis and feet cartesian positions at time t.
+        """
+        pelvis_pos = self.get_pelvis_pos(t)
+        stable_foot_pos = (self.x_stable, self.get_y_foot(self.stable_side), 0.0)
+        swing_foot_pos = self.get_swing_foot_pos(t)
+        pos = {
+            'pelvis': pelvis_pos,
+            self.stable_side + '_foot': stable_foot_pos,
+            self.swing_side + '_foot': swing_foot_pos
+        }
+        print("Positions at time {:.3f}:".format(t))
+        for l in ['pelvis', 'l_foot', 'r_foot']:
+            print("  {}: ({:.3f}, {:.3f}, {:.3f})".format(l, *pos[l]))
+        return pos
 
     def __call__(self, t):
         """
-        Returns a map of joint positions at time t.
+        Returns a map of cartesian positions at time t.
         """
-        stable_side = 'l' if self.swing_side == 'r' else 'r'
-
-        # Pelvis motion
-        pelvis_pos = self.get_pelvis_pos(t)
-        dx, dz = self.get_stable_foot_disp_vs_pelvis(pelvis_pos)
-        print('stable foot vs pelvis:  dx={:.4f}, dz={:.4f}'.format(dx, dz))
-        q_stable = darwin_leg_ik(dx, 0., dz, stable_side)
-
-        # Swing foot motion
-        swing_foot_pos = self.get_swing_foot_pos(t)
-        dx, dz = self.get_swing_foot_disp_vs_pelvis(swing_foot_pos, pelvis_pos)
-        print('swing foot vs pelvis:   dx={:.4f}, dz={:.4f}, z_foot={:.4f}'.format(dx, dz, swing_foot_pos[1]))
-        q_swing = darwin_leg_ik(dx, 0., dz, self.swing_side)
-
-        # Return a map of joint positions
-        stable_joints = ['_'.join([stable_side, n, 'joint']) for n in joint_names]
-        swing_joints = ['_'.join([self.swing_side, n, 'joint']) for n in joint_names]
-
-        return {**dict(zip(stable_joints, q_stable)),
-                **dict(zip(swing_joints, q_swing))}
+        return self.get_pos(t)
