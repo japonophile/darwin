@@ -2,6 +2,24 @@ from math import sqrt
 from .ik import PELVIS_HEIGHT_REST, FOOT_SPREAD
 
 
+def log_positions(pos, t):
+    print("Positions at time {:.3f}:".format(t))
+    for l in ['pelvis', 'l_foot', 'r_foot']:
+        print("  {}: ({:.3f}, {:.3f}, {:.3f})".format(l, *pos[l]))
+
+
+class ConstantTrajectory(object):
+    def __init__(self, pos):
+        self.pos = pos
+
+    def get_pos(self, t):
+        log_positions(self.pos, t)
+        return self.pos
+
+    def __call__(self, t):
+        return self.get_pos(t)
+
+
 class FootstepTrajectory(object):
     def __init__(self, step_length, step_height, x_stable, x_swing_start, pelvis_height, swing_side, duration,
                  pelvis_start_vel=[0., 0.], pelvis_end_vel=[0., 0.]):
@@ -65,9 +83,7 @@ class FootstepTrajectory(object):
             self.stable_side + '_foot': stable_foot_pos,
             self.swing_side + '_foot': swing_foot_pos
         }
-        print("Positions at time {:.3f}:".format(t))
-        for l in ['pelvis', 'l_foot', 'r_foot']:
-            print("  {}: ({:.3f}, {:.3f}, {:.3f})".format(l, *pos[l]))
+        log_positions(pos, t)
         return pos
 
     def __call__(self, t):
