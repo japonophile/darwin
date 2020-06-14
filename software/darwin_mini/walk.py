@@ -1,6 +1,7 @@
 from pypot.primitive import LoopPrimitive
 from .trajectory import ConstantTrajectory, FootstepTrajectory
 from .ik import darwin_ik
+from .ik import PELVIS_HEIGHT_REST, FOOT_SPREAD
 from numpy import rad2deg
 
 
@@ -25,19 +26,28 @@ class WalkStraight(LoopPrimitive):
         self.dt = 1. / frequency
         self.pos = None
 
+    @property
+    def stable_side(self):
+        return 'l' if self.swing_side == 'r' else 'r'
+
     def setup(self):
         self.swing_side = 'r'
         self.x_stable = 0.
         self.x_swing_start = 0.
+        self.pos = {
+            'pelvis': [0., 0., PELVIS_HEIGHT_REST],
+            'l_foot': [0., FOOT_SPREAD, 0.],
+            'r_foot': [0., -FOOT_SPREAD, 0.],
+        }
         self.start_step(0)
 
     def update(self):
         t = self.elapsed_time
         # print(t)
-        if self.state == WalkingState.SINGLE_SUPPORT:
-            self.run_single_support(t)
-        elif self.state == WalkingState.DOUBLE_SUPPORT:
+        if self.state == WalkingState.DOUBLE_SUPPORT:
             self.run_double_support(t)
+        elif self.state == WalkingState.SINGLE_SUPPORT:
+            self.run_single_support(t)
         else:
             raise Exception("Unknown state: {}".format(self.state))
 
@@ -46,13 +56,13 @@ class WalkStraight(LoopPrimitive):
         q = darwin_ik(self.pos)
         self.goto_position(q)
 
-    def run_single_support(self, t):
+    def run_double_support(self, t):
         t -= self.current_step * self.step_duration
-        if t > self.ssp_duration:
-            self.start_double_support()
+        if t > self.dsp_duration:
+            self.start_single_support()
         self.update_position(t)
 
-    def run_double_support(self, t):
+    def run_single_support(self, t):
         step = t // self.step_duration
         t = t % self.step_duration
         done = False
@@ -85,7 +95,7 @@ class WalkStraight(LoopPrimitive):
         print('\n*** Start step {} ***'.format(step + 1))
         self.current_step = step
         self.current_step_length = self.get_next_step_length()
-        self.start_single_support()
+        self.start_double_support()
 
     def start_next_step(self, step):
         self.swing_side = 'l' if self.swing_side == 'r' else 'r'
