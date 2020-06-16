@@ -2,7 +2,7 @@ from math import sin, acos, atan
 
 
 PELVIS_HEIGHT_REST = 0.118
-FOOT_SPREAD = 0.32  # lateral distance of each foot wrt pelvis
+FOOT_SPREAD = 0.032  # lateral distance of each foot wrt pelvis
 
 EPS = 1e-6
 a1 = 0.006

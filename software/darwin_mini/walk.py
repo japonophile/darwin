@@ -20,7 +20,7 @@ class WalkStraight(LoopPrimitive):
         self.motors = dict([(m.name, self.get_mockup_motor(m)) for m in self.robot.motors])
         self.distance_left = distance
         self.step_duration = step_duration
-        ssp_ratio = .85
+        ssp_ratio = .75
         self.ssp_duration = ssp_ratio * step_duration
         self.dsp_duration = (1 - ssp_ratio) * step_duration
         self.dt = 1. / frequency
@@ -111,9 +111,16 @@ class WalkStraight(LoopPrimitive):
             self.x_swing_start, self.pelvis_height, self.swing_side, self.ssp_duration)
         self.state = WalkingState.SINGLE_SUPPORT
 
+    def get_swing_target(self):
+        traj = FootstepTrajectory(
+            self.current_step_length, self.step_height, self.x_stable,
+            self.x_swing_start, self.pelvis_height, self.swing_side, self.ssp_duration)
+        return traj(self.ssp_duration)[self.swing_side + '_foot']
+
     def start_double_support(self):
         print(" >> start double support phase <<")
         self.current_trajectory = ConstantTrajectory(self.pos)
+        self.swing_target = self.get_swing_target()
         self.state = WalkingState.DOUBLE_SUPPORT
 
     def goto_position(self, qs):
