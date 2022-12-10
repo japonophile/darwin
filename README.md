@@ -2,6 +2,15 @@
 
 
 
+https://github.com/poppy-project/pypot
+https://github.com/stephane-caron/pymanoid
+https://scaron.info/teaching/how-do-biped-robots-walk.html
+https://scaron.info/teaching/prototyping-a-walking-pattern-generator.html
+https://osqp.org/docs/examples/mpc.html
+http://poppy:8888/tree
+https://github.com/petercorke/robotics-toolbox-python
+https://github.com/RobotLocomotion/drake
+
 
 ### How to build the V-REP scene (for use with CoppeliaSim simulator)
 

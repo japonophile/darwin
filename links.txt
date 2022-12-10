@@ -1,0 +1,14 @@
+https://github.com/AtsushiSakai/PythonRobotics/blob/master/Bipedal/bipedal_planner/bipedal_planner.py
+https://www.coppeliarobotics.com/helpFiles/en/buildingAModelTutorial.htm
+https://docs.poppy-project.org/en/
+https://github.com/ROBOTIS-GIT/emanual/blob/master/docs/en/edu/mini.md
+https://poppy.discourse.group/t/use-opencm9-04-as-a-usb2dynamixel/2209
+https://github.com/robotis-pandora/ROBOTIS-OpenCM/blob/master/OpenCM_ide/processing-head/build/shared/examples/06.%20Dynamixel/l_DxlTosser/l_DxlTosser.pde
+https://scaron.info/teaching/prototyping-a-walking-pattern-generator.html
+https://github.com/stephane-caron/pymanoid/blob/18b75807d679630752ea038536226fd46d6e8691/examples/horizontal_walking.py
+https://www.youtube.com/watch?v=e51yuluCI-c&list=PLLy_2iUCG87AjAXKbNMiKJZ2T9vvGpMB0&index=19
+https://robertomartinmartin.com/category/kuroki-machine-learning-on-a-robotis-mini/
+https://www.rt-shop.jp/index.php?main_page=product_info&products_id=3618
+http://robotisproshop.cart.fc2.com/ca50/270/p-r50-s/
+http://www.robotis.fr/content/9-compatibilites#SpecModeleConnecteur
+

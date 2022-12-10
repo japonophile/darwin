@@ -3,9 +3,10 @@ from .ik import PELVIS_HEIGHT_REST, FOOT_SPREAD
 
 
 def log_positions(pos, t):
-    print("Positions at time {:.3f}:".format(t))
-    for l in ['pelvis', 'l_foot', 'r_foot']:
-        print("  {}: ({:.3f}, {:.3f}, {:.3f})".format(l, *pos[l]))
+    # print("Positions at time {:.3f}:".format(t))
+    # for l in ['pelvis', 'l_foot', 'r_foot']:
+    #     print("  {}: ({:.3f}, {:.3f}, {:.3f})".format(l, *pos[l]))
+    pass
 
 
 class ConstantTrajectory(object):
